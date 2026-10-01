@@ -27,18 +27,23 @@ npm start        # serve the production build
 npm run typecheck # tsc --noEmit
 ```
 
-Deploys to Vercel with no configuration. One optional environment variable:
+Deployed at **https://funngro-revamp-fria.onrender.com**. One optional environment variable:
 
 | Variable | Purpose | Default |
 | --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Origin for canonicals, OG URLs, sitemap and JSON-LD | `https://funngro-instrument.vercel.app` |
+| `NEXT_PUBLIC_SITE_URL` | Origin for canonicals, OG URLs, sitemap and JSON-LD | `https://funngro-revamp-fria.onrender.com` |
 
-It lives in `src/lib/seo.ts` and is the single source for every absolute URL in
-the build, so setting it once moves canonicals, Open Graph images, `robots.txt`
-and all four JSON-LD graphs together. The live site gets this wrong —
-`robots.txt` and `sitemap.xml` advertise `www.funngro.com` while the app emits
-`https://funngro.com` canonicals, and that non-www host 302s to www, so every
-canonical points at a redirect.
+It lives in `src/lib/seo.ts` and is the single source for every absolute URL the
+app renders — canonicals, Open Graph and Twitter image URLs, and all four
+JSON-LD graphs move together when it is set.
+
+Two files are the exception: `public/robots.txt` and `public/sitemap.xml` are
+served statically and cannot read an environment variable, so they are
+hardcoded to the deployed origin and must be edited by hand if the site moves.
+Keeping those three files in agreement is the whole job — the live Funngro site
+gets it wrong, advertising `www.funngro.com` in `robots.txt` and
+`sitemap.xml` while the app emits `https://funngro.com` canonicals, and that
+non-www host 302s to www, so every canonical points at a redirect.
 
 ---
 

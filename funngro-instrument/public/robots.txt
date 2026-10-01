@@ -1,8 +1,9 @@
 # robots.txt
-# Replace the domain below with your production domain before deploying, and
-# keep it identical to SITE_URL in src/lib/seo.ts. A sitemap that disagrees with
-# the canonical tags is worse than no sitemap at all — that mismatch is finding
-# #2 in SEO-AUDIT.md.
+# Bound to the deployed origin. This file is served statically and cannot read
+# NEXT_PUBLIC_SITE_URL at runtime, so if the site ever moves, update this line
+# and the <loc> entries in sitemap.xml in the same change as SITE_URL in
+# src/lib/seo.ts. A sitemap that disagrees with the canonical tags is worse than
+# no sitemap at all — that mismatch is finding #2 in SEO-AUDIT.md.
 
 User-agent: *
 Allow: /
@@ -10,4 +11,4 @@ Allow: /
 # Nothing on this two-page build needs excluding from search. When more routes
 # are added, list private ones here rather than relying on noindex alone.
 
-Sitemap: https://funngro-instrument.vercel.app/sitemap.xml
+Sitemap: https://funngro-revamp-fria.onrender.com/sitemap.xml

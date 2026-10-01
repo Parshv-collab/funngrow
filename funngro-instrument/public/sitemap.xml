@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Sitemap for the Funngro instrument-panel build.
-  Replace https://funngro-instrument.vercel.app with your production domain and
-  keep it byte-identical to SITE_URL in src/lib/seo.ts.
+  Served statically, so these origins are hardcoded. Keep them byte-identical
+  to SITE_URL in src/lib/seo.ts — update all three files together if the site
+  ever moves, so the sitemap and the canonical tags cannot disagree.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://funngro-instrument.vercel.app/</loc>
+    <loc>https://funngro-revamp-fria.onrender.com/</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://funngro-instrument.vercel.app/company</loc>
+    <loc>https://funngro-revamp-fria.onrender.com/company</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

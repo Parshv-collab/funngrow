@@ -3,8 +3,10 @@ import { LINKS, SITE } from "@/content/site";
 
 /**
  * SITE_URL — the single origin behind canonical tags, Open Graph URLs, the
- * sitemap and every JSON-LD block. Set NEXT_PUBLIC_SITE_URL in your Vercel
- * project to point all of them at your real domain at once.
+ * sitemap and every JSON-LD block. NEXT_PUBLIC_SITE_URL takes precedence when
+ * it is set (Render supplies it); the deployed Render origin is the fallback so
+ * a build with no environment still emits the real, live URL rather than a
+ * placeholder.
  *
  * This centralisation is one of the things the audit flags about the live
  * Funngro build, where robots.txt and sitemap.xml use `www.funngro.com` while
@@ -12,7 +14,7 @@ import { LINKS, SITE } from "@/content/site";
  * 302-redirects to www, so every canonical points at a redirect.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://funngro-instrument.vercel.app"
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://funngro-revamp-fria.onrender.com"
 ).replace(/\/$/, "");
 
 export const abs = (path = "/") =>
