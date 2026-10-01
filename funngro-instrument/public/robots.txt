@@ -1,0 +1,13 @@
+# robots.txt
+# Replace the domain below with your production domain before deploying, and
+# keep it identical to SITE_URL in src/lib/seo.ts. A sitemap that disagrees with
+# the canonical tags is worse than no sitemap at all — that mismatch is finding
+# #2 in SEO-AUDIT.md.
+
+User-agent: *
+Allow: /
+
+# Nothing on this two-page build needs excluding from search. When more routes
+# are added, list private ones here rather than relying on noindex alone.
+
+Sitemap: https://funngro-instrument.vercel.app/sitemap.xml

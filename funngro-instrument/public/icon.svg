@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Funngro">
+  <rect width="64" height="64" rx="14" fill="#06130a"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.25" fill="none" stroke="#26342a" stroke-width="1.5"/>
+  <rect x="15" y="36" width="7" height="14" rx="3.5" fill="#5ddd96" opacity="0.45"/>
+  <rect x="28.5" y="27" width="7" height="23" rx="3.5" fill="#5ddd96" opacity="0.72"/>
+  <rect x="42" y="17" width="7" height="33" rx="3.5" fill="#5ddd96"/>
+</svg>

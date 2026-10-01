@@ -1,0 +1,16 @@
+node_modules
+.next
+out
+build
+.DS_Store
+*.pem
+npm-debug.log*
+.env*.local
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+
+# Puppeteer is installed ad hoc for the responsive screenshot check and is
+# deliberately not a dependency — see README "Verifying the layout".
+.puppeteer-cache
+shots

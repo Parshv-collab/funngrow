@@ -1,0 +1,422 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   FONTS — the real Funngro stack, self-hosted (no third-party request).
+   Instrument Serif ships a 400 roman AND a real 400 italic. The italic matters:
+   the roman→italic-mint headline pattern is the brand's signature, and their
+   live site loads no italic file at all, so it renders as a synthesised
+   oblique.
+   ========================================================================= */
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/instrument-serif-400.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/instrument-serif-italic-400.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/work-sans-400.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2074, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/work-sans-600.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2074, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/work-sans-700.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2074, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/jetbrains-mono-400.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2074, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ============================================================================
+   TOKENS
+
+   Brand values are the real Funngro custom properties (RESEARCH.md §2).
+
+   The status set is this design's one addition. On their live site green and
+   mint carry every meaning at once, so nothing can signal anything. Functional
+   colour is what makes a dashboard grammar possible — and it is used ONLY on
+   state indicators, never for decoration.
+   ========================================================================= */
+:root {
+  /* --- brand ------------------------------------------------------------ */
+  --background: 138 52% 5%; /* #06130a */
+  --foreground: 138 33% 93%; /* #e7f3eb */
+  --primary: 152 92% 35%; /* #07ab5f */
+  --primary-foreground: 138 52% 5%;
+  --accent: 146 65% 62%; /* #5ddd96  mint */
+  --accent-foreground: 138 52% 5%;
+  --prose-soft: 140 19% 80%; /* #c2d6c9 */
+  --muted-foreground: 140 11% 54%; /* #7d9785 */
+
+  --card: 144 23% 8%;
+  --muted: 144 23% 12%;
+  --border: 145 24% 13%;
+  --frame-border: 144 27% 16%; /* #26342a */
+
+  /* --- status (functional only) ----------------------------------------- */
+  --status-open: 146 65% 62%; /* #5ddd96  mint   */
+  --status-submitted: 47 78% 59%; /* #e8c547  amber  */
+  --status-approved: 216 100% 68%; /* #5b9cff  blue   */
+  --status-paid: 152 92% 35%; /* #07ab5f  green  */
+  --status-rejected: 10 76% 57%; /* #e5573c  red    */
+
+  /* --- rhythm ----------------------------------------------------------- */
+  --section-y: clamp(56px, 8vw, 120px);
+  --shell-x: 24px;
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* No light theme exists — this is a dark instrument surface. */
+  }
+
+  ::selection {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* The only motion in the build is the pill arrow, one hero fade and the feed
+     cursor. All three stop here. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* ---------------------------------------------------------------- layout */
+  .shell {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: var(--shell-x);
+  }
+
+  .section {
+    padding-block: var(--section-y);
+  }
+
+  /* ------------------------------------------------------------ typography */
+  /* Display: human moments only — headlines, a wallet balance, a name. */
+  .type-hero {
+    font-family: "Instrument Serif", ui-serif, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.5rem, 6.4vw, 5.5rem); /* 40 → 88px */
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .type-section {
+    font-family: "Instrument Serif", ui-serif, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.875rem, 4vw, 3.25rem); /* 30 → 52px */
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+
+  .type-figure {
+    font-family: "Instrument Serif", ui-serif, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.75rem, 3.4vw, 3rem); /* 28 → 48px */
+    line-height: 1;
+    letter-spacing: -0.015em;
+  }
+
+  /* The brand's signature: roman setup, italic mint payoff. */
+  .emphasis {
+    font-family: "Instrument Serif", ui-serif, Georgia, serif;
+    font-style: italic;
+    color: hsl(var(--accent));
+  }
+
+  /* Mono is the instrument voice — kickers, labels, every figure. */
+  .kicker {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.6875rem; /* 11px */
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .label-mono {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .num {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.875rem;
+  }
+
+  .body-copy {
+    font-size: 1.0625rem; /* 17px */
+    line-height: 1.7;
+    color: hsl(var(--prose-soft));
+  }
+
+  /* ---------------------------------------------------------------- pills */
+  /* Brand constant: the mint pill whose circular arrow chip slides right on
+     hover. Their hover moves padding-right from 28px to 42px. */
+  .pill-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.75rem 0.875rem 2rem;
+    border-radius: 999px;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    font-weight: 700;
+    font-size: 0.875rem;
+    transition: padding 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.2s ease, transform 0.2s ease;
+  }
+  .pill-primary:hover {
+    padding-right: 2.625rem;
+    background-color: hsl(var(--accent));
+  }
+  .pill-primary:active {
+    transform: translateY(1px);
+  }
+
+  .pill-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 999px;
+    border: 1px solid hsl(var(--frame-border));
+    color: hsl(var(--foreground));
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease, color 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .pill-outline:hover {
+    border-color: hsl(var(--accent) / 0.5);
+    color: hsl(var(--accent));
+    background-color: hsl(var(--card));
+  }
+
+  /* The small dark chip inside a primary pill. */
+  .circ {
+    width: 1.75rem;
+    height: 1.75rem;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: hsl(var(--background));
+    color: hsl(var(--accent));
+    font-size: 0.875rem;
+    line-height: 1;
+  }
+
+  /* --------------------------------------------------------------- panels */
+  /* Flat surfaces with a 1px rule and a 16px radius. No drop shadows anywhere
+     in this build except the feed's inset glow — see below. */
+  .panel {
+    border: 1px solid hsl(var(--frame-border));
+    border-radius: 16px;
+    background-color: hsl(var(--card));
+  }
+
+  /* The one shadow in the system, as specified: a subtle mint inset glow, and
+     only on the payout feed. */
+  .panel-glow {
+    box-shadow: inset 0 1px 0 0 hsl(var(--accent) / 0.08),
+      inset 0 0 40px 0 hsl(var(--accent) / 0.08);
+  }
+
+  /* A titled bar across the top of a panel, the way a dashboard widget has a
+     header. */
+  .panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid hsl(var(--border));
+    padding: 0.875rem 1.25rem;
+  }
+
+  /* --------------------------------------------------------------- chips */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid hsl(var(--frame-border));
+    border-radius: 6px;
+    padding: 0.4375rem 0.75rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+    transition: color 0.2s ease, border-color 0.2s ease,
+      background-color 0.2s ease;
+    white-space: nowrap;
+  }
+  .chip:hover {
+    color: hsl(var(--foreground));
+    border-color: hsl(var(--accent) / 0.4);
+  }
+  .chip-active {
+    color: hsl(var(--accent-foreground));
+    background-color: hsl(var(--accent));
+    border-color: hsl(var(--accent));
+  }
+  .chip-active:hover {
+    color: hsl(var(--accent-foreground));
+    border-color: hsl(var(--accent));
+  }
+
+  /* A status indicator. Always carries a dot plus a word — colour is never the
+     only signal, which is what keeps this readable without colour vision. */
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid currentColor;
+    padding: 0.3125rem 0.5rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* ---------------------------------------------------------------- tables */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+  .data-table thead th {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: hsl(var(--muted-foreground));
+    text-align: left;
+    padding: 0.625rem 1rem;
+    border-bottom: 1px solid hsl(var(--border));
+    white-space: nowrap;
+  }
+  .data-table tbody td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid hsl(var(--border));
+    vertical-align: middle;
+  }
+  .data-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .data-table tbody tr {
+    transition: background-color 0.15s ease;
+  }
+  .data-table tbody tr:hover {
+    background-color: hsl(var(--muted) / 0.6);
+  }
+
+  /* Scroll container for tables on narrow screens. Contained, so the page
+     itself never scrolls sideways. */
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  /* Hides a table column below a breakpoint without losing the markup —
+     better than duplicating the table for mobile. */
+  .col-collapse {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .col-collapse {
+      display: table-cell;
+    }
+  }
+}
